@@ -1,8 +1,10 @@
 // import * as PIXI from "pixi.js";
+const width = 500;
+const height = 500;
 
 const app = new PIXI.Application({
-  width: 500,
-  height: 500,
+  width: width,
+  height: height,
   antialias: true,
   transparent: false,
   resolution: 1,
@@ -30,10 +32,10 @@ class Player {
 
     stage.addChild(this._playerRectangle);
   }
+
   public movePlayer(): void {
     const keysDown = (e) => {
       this._keys[e.keyCode] = true;
-      console.log(typeof this._keys[e.keyCode]);
     };
     const keysUp = (e) => {
       this._keys[e.keyCode] = false;
@@ -42,16 +44,16 @@ class Player {
     window.addEventListener("keyup", keysUp);
     const speed = 5;
     const arrowsInteraction = () => {
-      if (this._keys[37]) {
+      if (this._keys[37] && this._playerRectangle.x > 5) {
         this._playerRectangle.x -= speed;
       }
-      if (this._keys[39]) {
+      if (this._keys[39] && this._playerRectangle.x < width - 45) {
         this._playerRectangle.x += speed;
       }
-      if (this._keys[38]) {
+      if (this._keys[38] && this._playerRectangle.y > 5) {
         this._playerRectangle.y -= speed;
       }
-      if (this._keys[40]) {
+      if (this._keys[40] && this._playerRectangle.y < height - 45) {
         this._playerRectangle.y += speed;
       }
     };
